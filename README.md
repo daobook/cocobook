@@ -8,4 +8,4 @@
 
 ## 注意事项
 
-本项目主要针对 Python 包进行维护，且 fork 本项目之后，您还需要对本项目进行编译以支持 `mask`，编译方法见 [:book: COCO 数据集的使用](https://www.cnblogs.com/q735613050/p/8969452.html) 的 “1 简介” 部分。
+本项目主要针对 Python 包进行维护，且 fork 本项目之后，您还需要对本项目进行编译以支持 `mask`，编译方法见 [COCO 数据集的使用](https://www.cnblogs.com/q735613050/p/8969452.html) 的 “1 简介” 部分。
