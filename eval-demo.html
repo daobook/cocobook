@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>COCO Book &#8212; d2py 0.1 文档</title>
+    <title>Eval COCO Demo &#8212; d2py 0.1 文档</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -93,11 +93,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
-    <link rel="canonical" href="https://daobook.github.io/cocobook/index.html" />
+    <link rel="canonical" href="https://daobook.github.io/cocobook/eval-demo.html" />
     <link rel="shortcut icon" href="_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
-    <link rel="next" title="样例" href="demo.html" /> 
+    <link rel="prev" title="样例" href="demo.html" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh_CN">
     
@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="#">
+    <a class="navbar-brand text-wrap" href="index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
@@ -179,14 +179,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="demo.html">
    样例
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="eval-demo.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Eval COCO Demo
   </a>
  </li>
@@ -243,6 +243,71 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/daobook/cocobook/main?urlpath=lab/tree/doc/eval-demo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/daobook/cocobook/blob/main/doc/eval-demo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -282,7 +347,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/daobook/cocobook/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/daobook/cocobook/issues/new?title=Issue%20on%20page%20%2Feval-demo.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -299,7 +364,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/daobook/cocobook/edit/main/doc/index.md"
+        <a href="https://github.com/daobook/cocobook/edit/main/doc/eval-demo.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -327,7 +392,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/index.md.txt"
+        <a href="_sources/eval-demo.ipynb.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -338,7 +403,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -364,91 +429,151 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> 导航
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   COCO Book
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   索引和表格
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>COCO Book</h1>
+                <h1>Eval COCO Demo</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> 导航 </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   COCO Book
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   索引和表格
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
             <main id="main-content" role="main">
                 
               <div>
-                 <section class="tex2jax_ignore mathjax_ignore" id="coco-book">
-<h1>COCO Book<a class="headerlink" href="#coco-book" title="永久链接至标题">#</a></h1>
-<p><a class="reference external" href="https://github.com/daobook/cocobook/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/daobook/cocobook" /></a> <a class="reference external" href="https://github.com/daobook/cocobook/releases"><img alt="Download" src="https://img.shields.io/badge/downloads-master-green.svg" /></a><a class="reference external" href="https://github.com/daobook/cocobook/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/daobook/cocobook.svg" /></a> <a class="reference external" href="https://github.com/daobook/cocobook/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/daobook/cocobook.svg" /></a></p>
-<p>本站由 ©<a href="https://xinetzone.github.io/" target="_blank">xinetzone</a> 基于 <a href="http://cocodataset.org/" target="_blank">cocodataset</a> 的 <a href="https://github.com/cocodataset/cocoapi" target="_blank">cocoapi</a> 修改而成 <a class="reference external" href="https://github.com/daobook/cocobook">daobook/cocobook</a>（旧库见 <a class="reference external" href="https://github.com/Xinering/cocoapi">Xinering/cocoapi</a>）。详细介绍阅读 <a class="reference external" href="https://github.com/Xinering/cocoapi/blob/main/README.txt">自述文档</a>。</p>
-<p>添加对 <code class="docutils literal notranslate"><span class="pre">.zip</span></code> 文件的支持。</p>
-<div class="toctree-wrapper compound">
+                 <section class="tex2jax_ignore mathjax_ignore" id="eval-coco-demo">
+<h1>Eval COCO Demo<a class="headerlink" href="#eval-coco-demo" title="永久链接至标题">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)])</span>
+</pre></div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>索引和表格<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">索引</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">模块索引</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">搜索页面</span></a></p></li>
-</ul>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pycocotools.coco</span> <span class="kn">import</span> <span class="n">COCO</span>
+<span class="kn">from</span> <span class="nn">pycocotools.cocoeval</span> <span class="kn">import</span> <span class="n">COCOeval</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">annType</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;segm&#39;</span><span class="p">,</span> <span class="s1">&#39;bbox&#39;</span><span class="p">,</span> <span class="s1">&#39;keypoints&#39;</span><span class="p">]</span>
+<span class="n">annType</span> <span class="o">=</span> <span class="n">annType</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># specify type here</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;person_keypoints&#39;</span> <span class="k">if</span> <span class="n">annType</span> <span class="o">==</span> <span class="s1">&#39;keypoints&#39;</span> <span class="k">else</span> <span class="s1">&#39;instances&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Running demo for *</span><span class="si">{</span><span class="n">annType</span><span class="si">}</span><span class="s1">* results.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running demo for *bbox* results.
+</pre></div>
+</div>
+</div>
+</div>
+<p>初始化 COCO ground truth api：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataDir</span> <span class="o">=</span> <span class="s1">&#39;/media/pc/data/4tb/lxw/tests/datasets/coco&#39;</span>
+<span class="n">dataType</span> <span class="o">=</span> <span class="s1">&#39;val2014&#39;</span>
+<span class="n">annFile</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">dataDir</span><span class="si">}</span><span class="s1">/annotations/</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">dataType</span><span class="si">}</span><span class="s1">.json&#39;</span>
+<span class="n">cocoGt</span> <span class="o">=</span> <span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loading annotations into memory...
+Done (t=5.08s)
+creating index...
+index created!
+</pre></div>
+</div>
+</div>
+</div>
+<p>初始化 COCO 检测 api：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataDir</span> <span class="o">=</span> <span class="s1">&#39;../results/&#39;</span> <span class="c1"># 检测结果根目录</span>
+<span class="n">dataType</span> <span class="o">=</span> <span class="s1">&#39;val2014&#39;</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;instances&quot;</span>
+<span class="n">resFile</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dataDir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">dataType</span><span class="si">}</span><span class="s2">_fakebbox100_results.json&quot;</span>
+<span class="n">cocoDt</span> <span class="o">=</span> <span class="n">cocoGt</span><span class="o">.</span><span class="n">loadRes</span><span class="p">(</span><span class="n">resFile</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading and preparing results...
+DONE (t=0.05s)
+creating index...
+index created!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imgIds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cocoGt</span><span class="o">.</span><span class="n">getImgIds</span><span class="p">())</span>
+<span class="n">imgIds</span> <span class="o">=</span> <span class="n">imgIds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">imgId</span> <span class="o">=</span> <span class="n">imgIds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>运行评估：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cocoEval</span> <span class="o">=</span> <span class="n">COCOeval</span><span class="p">(</span><span class="n">cocoGt</span><span class="p">,</span> <span class="n">cocoDt</span><span class="p">,</span> <span class="n">annType</span><span class="p">)</span>
+<span class="n">cocoEval</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">imgIds</span>  <span class="o">=</span> <span class="n">imgIds</span>
+<span class="n">cocoEval</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+<span class="n">cocoEval</span><span class="o">.</span><span class="n">accumulate</span><span class="p">()</span>
+<span class="n">cocoEval</span><span class="o">.</span><span class="n">summarize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.34s).
+Accumulating evaluation results...
+DONE (t=0.40s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.697
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.573
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.519
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.501
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.387
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.594
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.595
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.640
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.566
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.564
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -481,12 +606,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="demo.html" title="下一页 页">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">下一页</p>
-        <p class="prev-next-title">样例</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+    <a class='left-prev' id="prev-link" href="demo.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title">样例</p>
+        </div>
     </a>
 </div>
             </footer>

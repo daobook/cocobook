@@ -1,0 +1,288 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2018-12-03T08:27:53.166107Z",
+     "start_time": "2018-12-03T08:27:52.293917Z"
+    }
+   },
+   "source": [
+    "# Eval COCO Demo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "from pathlib import Path\n",
+    "path = Path(\"../src\").resolve()\n",
+    "sys.path.extend([str(path)])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%matplotlib inline\n",
+    "from matplotlib import pyplot as plt\n",
+    "from pycocotools.coco import COCO\n",
+    "from pycocotools.cocoeval import COCOeval\n",
+    "import numpy as np\n",
+    "\n",
+    "\n",
+    "plt.rcParams['figure.figsize'] = (10.0, 8.0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2018-12-03T08:28:03.797211Z",
+     "start_time": "2018-12-03T08:28:03.791205Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Running demo for *bbox* results.\n"
+     ]
+    }
+   ],
+   "source": [
+    "annType = ['segm', 'bbox', 'keypoints']\n",
+    "annType = annType[1]  # specify type here\n",
+    "prefix = 'person_keypoints' if annType == 'keypoints' else 'instances'\n",
+    "print(f'Running demo for *{annType}* results.')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "初始化 COCO ground truth api："
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "loading annotations into memory...\n",
+      "Done (t=5.08s)\n",
+      "creating index...\n",
+      "index created!\n"
+     ]
+    }
+   ],
+   "source": [
+    "dataDir = '/media/pc/data/4tb/lxw/tests/datasets/coco'\n",
+    "dataType = 'val2014'\n",
+    "annFile = f'{dataDir}/annotations/{prefix}_{dataType}.json'\n",
+    "cocoGt = COCO(annFile)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "初始化 COCO 检测 api："
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Loading and preparing results...\n",
+      "DONE (t=0.05s)\n",
+      "creating index...\n",
+      "index created!\n"
+     ]
+    }
+   ],
+   "source": [
+    "dataDir = '../results/' # 检测结果根目录\n",
+    "dataType = 'val2014'\n",
+    "prefix = \"instances\"\n",
+    "resFile = f\"{dataDir}/{prefix}_{dataType}_fakebbox100_results.json\"\n",
+    "cocoDt = cocoGt.loadRes(resFile)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "imgIds = sorted(cocoGt.getImgIds())\n",
+    "imgIds = imgIds[0:100]\n",
+    "imgId = imgIds[np.random.randint(100)]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "运行评估："
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Running per image evaluation...\n",
+      "Evaluate annotation type *bbox*\n",
+      "DONE (t=0.34s).\n",
+      "Accumulating evaluation results...\n",
+      "DONE (t=0.40s).\n",
+      " Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505\n",
+      " Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.697\n",
+      " Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.573\n",
+      " Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586\n",
+      " Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.519\n",
+      " Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.501\n",
+      " Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.387\n",
+      " Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.594\n",
+      " Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.595\n",
+      " Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.640\n",
+      " Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.566\n",
+      " Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.564\n"
+     ]
+    }
+   ],
+   "source": [
+    "cocoEval = COCOeval(cocoGt, cocoDt, annType)\n",
+    "cocoEval.params.imgIds  = imgIds\n",
+    "cocoEval.evaluate()\n",
+    "cocoEval.accumulate()\n",
+    "cocoEval.summarize()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3.8.13 ('tvm38': conda)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.13"
+  },
+  "latex_envs": {
+   "LaTeX_envs_menu_present": true,
+   "autoclose": false,
+   "autocomplete": true,
+   "bibliofile": "biblio.bib",
+   "cite_by": "apalike",
+   "current_citInitial": 1,
+   "eqLabelWithNumbers": true,
+   "eqNumInitial": 1,
+   "hotkeys": {
+    "equation": "Ctrl-E",
+    "itemize": "Ctrl-I"
+   },
+   "labels_anchors": false,
+   "latex_user_defs": false,
+   "report_style_numbering": false,
+   "user_envs_cfg": false
+  },
+  "nbTranslate": {
+   "displayLangs": [
+    "*"
+   ],
+   "hotkey": "alt-t",
+   "langInMainMenu": true,
+   "sourceLang": "en",
+   "targetLang": "fr",
+   "useGoogleTranslate": true
+  },
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": false
+  },
+  "varInspector": {
+   "cols": {
+    "lenName": 16,
+    "lenType": 16,
+    "lenVar": 40
+   },
+   "kernels_config": {
+    "python": {
+     "delete_cmd_postfix": "",
+     "delete_cmd_prefix": "del ",
+     "library": "var_list.py",
+     "varRefreshCmd": "print(var_dic_list())"
+    },
+    "r": {
+     "delete_cmd_postfix": ") ",
+     "delete_cmd_prefix": "rm(",
+     "library": "var_list.r",
+     "varRefreshCmd": "cat(var_dic_list()) "
+    }
+   },
+   "types_to_exclude": [
+    "module",
+    "function",
+    "builtin_function_or_method",
+    "instance",
+    "_Feature"
+   ],
+   "window_display": false
+  },
+  "vscode": {
+   "interpreter": {
+    "hash": "3555d4060e1bb256f2e385b42190aa51debd92785a45a343e60f30a52ea749ac"
+   }
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 1
+}

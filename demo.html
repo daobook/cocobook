@@ -97,6 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/page-logo.jfif"/>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="Eval COCO Demo" href="eval-demo.html" />
     <link rel="prev" title="COCO Book" href="index.html" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="zh_CN">
@@ -183,6 +184,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    样例
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="eval-demo.html">
+   Eval COCO Demo
   </a>
  </li>
 </ul>
@@ -449,6 +455,12 @@ title="Print to PDF"
               <div>
                  <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>样例<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本项目主要针对 Python 包进行维护，且 fork 本项目之后，您还需要对本项目进行编译以支持 <code class="docutils literal notranslate"><span class="pre">mask</span></code>，编译方法见 <a class="reference external" href="https://www.cnblogs.com/q735613050/p/8969452.html">COCO 数据集的使用</a> 的 “1 简介” 部分。</p>
+</div>
+<p>本节阐述 COCO API 的简单使用。</p>
+<p>以局部加载 <code class="docutils literal notranslate"><span class="pre">pycocotools</span></code> 的方式，使用该 API。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -463,10 +475,10 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pycocotools.coco</span> <span class="kn">import</span> <span class="n">COCO</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">skimage.io</span> <span class="k">as</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pylab</span>
-<span class="n">pylab</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -480,31 +492,33 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>为实例注解初始化 COCO api：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize COCO api for instance annotations</span>
-<span class="n">coco</span> <span class="o">=</span> <span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coco</span> <span class="o">=</span> <span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loading annotations into memory...
-Done (t=14.55s)
+Done (t=1.22s)
 creating index...
 index created!
 </pre></div>
 </div>
 </div>
 </div>
+<p>显示 COCO 类别和超类别：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># display COCO categories and supercategories</span>
-<span class="n">cats</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadCats</span><span class="p">(</span><span class="n">coco</span><span class="o">.</span><span class="n">getCatIds</span><span class="p">())</span>
-<span class="n">nms</span><span class="o">=</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">cats</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;COCO categories: </span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nms</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cats</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadCats</span><span class="p">(</span><span class="n">coco</span><span class="o">.</span><span class="n">getCatIds</span><span class="p">())</span>
+<span class="n">nms</span> <span class="o">=</span> <span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">cats</span><span class="p">]</span>
+<span class="n">nms</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;COCO categories: </span><span class="se">\n</span><span class="si">{</span><span class="n">nms</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="n">nms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;supercategory&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">cats</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;COCO supercategories: </span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nms</span><span class="p">)))</span>
+<span class="n">nms</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nms</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;COCO supercategories: </span><span class="se">\n</span><span class="si">{</span><span class="n">nms</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -513,18 +527,18 @@ index created!
 person bicycle car motorcycle airplane bus train truck boat traffic light fire hydrant stop sign parking meter bench bird cat dog horse sheep cow elephant bear zebra giraffe backpack umbrella handbag tie suitcase frisbee skis snowboard sports ball kite baseball bat baseball glove skateboard surfboard tennis racket bottle wine glass cup fork knife spoon bowl banana apple sandwich orange broccoli carrot hot dog pizza donut cake chair couch potted plant bed dining table toilet tv laptop mouse remote keyboard cell phone microwave oven toaster sink refrigerator book clock vase scissors teddy bear hair drier toothbrush
 
 COCO supercategories: 
-kitchen person vehicle animal furniture electronic appliance accessory indoor outdoor food sports
+kitchen appliance furniture outdoor vehicle sports food animal electronic indoor accessory person
 </pre></div>
 </div>
 </div>
 </div>
+<p>获取所有包含给定类别的图像，随机选择一个：</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all images containing given categories, select one at random</span>
-<span class="n">catIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getCatIds</span><span class="p">(</span><span class="n">catNms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">,</span><span class="s1">&#39;dog&#39;</span><span class="p">,</span><span class="s1">&#39;skateboard&#39;</span><span class="p">]);</span>
-<span class="n">imgIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getImgIds</span><span class="p">(</span><span class="n">catIds</span><span class="o">=</span><span class="n">catIds</span> <span class="p">);</span>
-<span class="n">imgIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getImgIds</span><span class="p">(</span><span class="n">imgIds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">324158</span><span class="p">])</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadImgs</span><span class="p">(</span><span class="n">imgIds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">imgIds</span><span class="p">))])[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getCatIds</span><span class="p">(</span><span class="n">catNms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;person&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;skateboard&#39;</span><span class="p">])</span>
+<span class="n">imgIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getImgIds</span><span class="p">(</span><span class="n">catIds</span><span class="o">=</span><span class="n">catIds</span> <span class="p">)</span>
+<span class="n">imgIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getImgIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="p">[</span><span class="mi">324158</span><span class="p">])</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadImgs</span><span class="p">(</span><span class="n">imgIds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">imgIds</span><span class="p">))])[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -548,28 +562,29 @@ kitchen person vehicle animal furniture electronic appliance accessory indoor ou
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load and display instance annotations</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">annIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">catIds</span><span class="o">=</span><span class="n">catIds</span><span class="p">,</span> <span class="n">iscrowd</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">annIds</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">catIds</span><span class="o">=</span><span class="n">catIds</span><span class="p">,</span> <span class="n">iscrowd</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">anns</span> <span class="o">=</span> <span class="n">coco</span><span class="o">.</span><span class="n">loadAnns</span><span class="p">(</span><span class="n">annIds</span><span class="p">)</span>
 <span class="n">coco</span><span class="o">.</span><span class="n">showAnns</span><span class="p">(</span><span class="n">anns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8192a60b6abe2826cbd382474599cbc1db1946b2d418b53b5126602a422d5126.png" src="_images/8192a60b6abe2826cbd382474599cbc1db1946b2d418b53b5126602a422d5126.png" />
+<img alt="_images/058dae6e9ddc1b1d011e68417f62c7329a3219dea5b3a0abcdbd9a0477e65ced.png" src="_images/058dae6e9ddc1b1d011e68417f62c7329a3219dea5b3a0abcdbd9a0477e65ced.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize COCO api for person keypoints annotations</span>
-<span class="n">annFile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/annotations/person_keypoints_</span><span class="si">{}</span><span class="s1">.json&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataDir</span><span class="p">,</span><span class="n">dataType</span><span class="p">)</span>
-<span class="n">coco_kps</span><span class="o">=</span><span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
+<span class="n">annFile</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">dataDir</span><span class="si">}</span><span class="s1">/annotations/person_keypoints_</span><span class="si">{</span><span class="n">dataType</span><span class="si">}</span><span class="s1">.json&#39;</span>
+<span class="n">coco_kps</span> <span class="o">=</span> <span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loading annotations into memory...
-Done (t=0.27s)
+Done (t=1.11s)
 creating index...
 index created!
 </pre></div>
@@ -581,27 +596,27 @@ index created!
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load and display keypoints annotations</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">annIds</span> <span class="o">=</span> <span class="n">coco_kps</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">catIds</span><span class="o">=</span><span class="n">catIds</span><span class="p">,</span> <span class="n">iscrowd</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">annIds</span> <span class="o">=</span> <span class="n">coco_kps</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">catIds</span><span class="o">=</span><span class="n">catIds</span><span class="p">,</span> <span class="n">iscrowd</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">anns</span> <span class="o">=</span> <span class="n">coco_kps</span><span class="o">.</span><span class="n">loadAnns</span><span class="p">(</span><span class="n">annIds</span><span class="p">)</span>
 <span class="n">coco_kps</span><span class="o">.</span><span class="n">showAnns</span><span class="p">(</span><span class="n">anns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/81422d117f3615e964b2d7be76512499f3a3c73294f72b20377d5fe7cc03ab18.png" src="_images/81422d117f3615e964b2d7be76512499f3a3c73294f72b20377d5fe7cc03ab18.png" />
+<img alt="_images/dfde061abf755381c9f46af6aab82c6ae3c142b71859284288de034f8117a777.png" src="_images/dfde061abf755381c9f46af6aab82c6ae3c142b71859284288de034f8117a777.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize COCO api for caption annotations</span>
-<span class="n">annFile</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/annotations/captions_</span><span class="si">{}</span><span class="s1">.json&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataDir</span><span class="p">,</span><span class="n">dataType</span><span class="p">)</span>
-<span class="n">coco_caps</span><span class="o">=</span><span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
+<span class="n">annFile</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">dataDir</span><span class="si">}</span><span class="s1">/annotations/captions_</span><span class="si">{</span><span class="n">dataType</span><span class="si">}</span><span class="s1">.json&#39;</span>
+<span class="n">coco_caps</span> <span class="o">=</span> <span class="n">COCO</span><span class="p">(</span><span class="n">annFile</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loading annotations into memory...
-Done (t=0.04s)
+Done (t=0.09s)
 creating index...
 index created!
 </pre></div>
@@ -611,10 +626,12 @@ index created!
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load and display caption annotations</span>
-<span class="n">annIds</span> <span class="o">=</span> <span class="n">coco_caps</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]);</span>
+<span class="n">annIds</span> <span class="o">=</span> <span class="n">coco_caps</span><span class="o">.</span><span class="n">getAnnIds</span><span class="p">(</span><span class="n">imgIds</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
 <span class="n">anns</span> <span class="o">=</span> <span class="n">coco_caps</span><span class="o">.</span><span class="n">loadAnns</span><span class="p">(</span><span class="n">annIds</span><span class="p">)</span>
 <span class="n">coco_caps</span><span class="o">.</span><span class="n">showAnns</span><span class="p">(</span><span class="n">anns</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -667,6 +684,13 @@ A man walking his dog on a quiet country road.
             <p class="prev-next-subtitle">上一页</p>
             <p class="prev-next-title">COCO Book</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="eval-demo.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">Eval COCO Demo</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

@@ -1,5 +1,3 @@
-# COCO Book
-
 ```{include} ../README.md
 ```
 
@@ -8,6 +6,7 @@
 :hidden:
 
 demo
+eval-demo
 ```
 
 # 索引和表格
